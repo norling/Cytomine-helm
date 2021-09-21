@@ -35,6 +35,14 @@ postgresql:
     repository: cytomine/postgis
     tag: v2.0.0
 
+mongodb:
+  port: 27017
+  statusPort: 28017
+  image:
+    pullPolicy: IfNotPresent
+    repository: cytomine/mongodb
+    tag: v1.1.2
+
 nginx:
   port: 80
   image:
