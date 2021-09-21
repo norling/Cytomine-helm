@@ -20,6 +20,15 @@ memcached:
       memory: "1Gi"
       cpu: "500m"
 
+rabbitmq:
+  port: 5672
+  managementPort: 15672
+  password: router
+  image:
+    pullPolicy: IfNotPresent
+    repository: cytomine/rabbitmq
+    tag: v1.1.2
+
 nginx:
   port: 80
   image:

@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "cytomine.name" . }}-rabbitmq
+  labels:
+    role: rabbitmq
+    app: {{ include "cytomine.name" . }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+    component: {{ .Release.Name }}-rabbitmq
+    release: {{ .Release.Name }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ template "cytomine.name" . }}-rabbitmq
+      release: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        role: rabbitmq
+        app: {{ template "cytomine.name" . }}-rabbitmq
+        release: {{ .Release.Name }}
+    spec:
+      serviceAccountName: {{ include "cytomine.serviceAccountName" . }}
+      containers:
+        - name: {{ .Chart.Name }}-rabbitmq
+          image: "{{ .Values.rabbitmq.image.repository }}:{{ .Values.rabbitmq.image.tag }}"
+          imagePullPolicy: {{ .Values.rabbitmq.image.pullPolicy }}
+          env:
+          - name: RABBITMQ_PASS
+            value: {{ .Values.rabbitmq.password }}
+          ports:
+            - name: amqp
+              containerPort: {{ .Values.rabbitmq.port }}
+              protocol: TCP
+            - name: management
+              containerPort: {{ .Values.rabbitmq.managementPort }}
+          livenessProbe:
+            tcpSocket:
+              port: amqp
+            initialDelaySeconds: 30
+            timeoutSeconds: 5
+          readinessProbe:
+            tcpSocket:
+              port: amqp
+            initialDelaySeconds: 30
+            timeoutSeconds: 15
