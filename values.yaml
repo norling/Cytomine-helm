@@ -29,6 +29,12 @@ rabbitmq:
     repository: cytomine/rabbitmq
     tag: v1.1.2
 
+postgresql:
+  image:
+    pullPolicy: IfNotPresent
+    repository: cytomine/postgis
+    tag: v2.0.0
+
 nginx:
   port: 80
   image:
