@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ include "cytomine.name" . }}-ingress
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: {{ include "cytomine.name" . }}.test
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ include "cytomine.name" . }}-nginx
+                port:
+                  number: 80
