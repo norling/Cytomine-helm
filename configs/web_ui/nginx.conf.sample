@@ -15,7 +15,7 @@ http {
   sendfile        on;
   keepalive_timeout  65;
   server {
-    listen       80;
+    listen       {{ .Values.web_ui.port }};
     server_name  {{ include "cytomine.name" . }}-web-ui;
     location / {
       root   /app;

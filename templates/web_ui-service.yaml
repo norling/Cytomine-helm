@@ -7,6 +7,6 @@ spec:
     app: {{ include "cytomine.name" . }}-web-ui
   ports:
     - name: http
-      port: 80
-      targetPort: 80
+      port: {{ .Values.web_ui.port }}
+      targetPort: {{ .Values.web_ui.port }}
       protocol: TCP

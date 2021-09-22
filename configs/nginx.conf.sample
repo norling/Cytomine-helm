@@ -52,7 +52,7 @@ http {
         location / {
             proxy_set_header X-Real-IP $remote_addr;
             proxy_set_header Host $host;
-            proxy_pass http://{{ include "cytomine.name" . }}-web-ui;
+            proxy_pass http://{{ include "cytomine.name" . }}-web-ui:{{ .Values.web_ui.port }};
         }
         # location /api {
         #     proxy_intercept_errors off;

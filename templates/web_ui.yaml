@@ -39,7 +39,7 @@ spec:
               subPath: configuration.json
           ports:
             - name: http
-              containerPort: 80
+              containerPort: {{ .Values.web_ui.port }}
           livenessProbe:
             httpGet:
               path: /
