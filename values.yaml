@@ -70,6 +70,13 @@ iip_cyto:
     repository: cytomine/iipcyto
     tag: v1.2.2
 
+bioformat:
+  port: 4321
+  image:
+    pullPolicy: IfNotPresent
+    repository: cytomine/bioformat
+    tag: v1.1.2
+
 nginx:
   port: 80
   image:
