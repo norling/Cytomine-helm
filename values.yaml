@@ -6,8 +6,8 @@
 # Globals
 #
 
-totalStorage: "5Gi"
-singularityStorage: "1Gi"
+singularityStorage: "2Gi"
+imageStorage: "2Gi"
 
 #
 # Services - these are the services deployed by this chart
@@ -51,12 +51,24 @@ mongodb:
     tag: v1.1.2
 
 slurm:
-  port: 80
+  port: 8000
   sshPort: 22
   image:
     pullPolicy: IfNotPresent
     repository: cytomine/slurm
     tag: v1.0.0
+
+iip_off:
+  image:
+    pullPolicy: IfNotPresent
+    repository: cytomine/iipofficial
+    tag: v1.2.0
+
+iip_cyto:
+  image:
+    pullPolicy: IfNotPresent
+    repository: cytomine/iipcyto
+    tag: v1.2.2
 
 nginx:
   port: 80

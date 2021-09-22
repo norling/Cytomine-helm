@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: {{ template "cytomine.name" . }}-singularity-claim
+  name: {{ template "cytomine.name" . }}-image-claim
 spec:
   accessModes:
     - ReadWriteMany
   resources:
     requests:
-      storage: {{ .Values.singularityStorage }}
+      storage: {{ .Values.imageStorage }}
