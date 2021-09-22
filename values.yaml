@@ -3,6 +3,13 @@
 # Declare variables to be passed into your templates.
 
 #
+# Globals
+#
+
+totalStorage: "5Gi"
+singularityStorage: "1Gi"
+
+#
 # Services - these are the services deployed by this chart
 #
 
@@ -42,6 +49,14 @@ mongodb:
     pullPolicy: IfNotPresent
     repository: cytomine/mongodb
     tag: v1.1.2
+
+slurm:
+  port: 80
+  sshPort: 22
+  image:
+    pullPolicy: IfNotPresent
+    repository: cytomine/slurm
+    tag: v1.0.0
 
 nginx:
   port: 80

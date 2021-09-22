@@ -13,3 +13,6 @@
 
 # temp files for use when developing
 temp/
+
+# encryption keys
+configs/software_router/ssh_key*

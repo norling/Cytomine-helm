@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "cytomine.name" . }}-slurm-config
+data:
+  authorized_keys: |-
+    {{ .Files.Get "configs/software_router/ssh_key.pub" | nindent 4 }}

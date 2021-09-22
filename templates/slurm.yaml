@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "cytomine.name" . }}-slurm
+  labels:
+    role: slurm
+    app: {{ include "cytomine.name" . }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+    component: {{ .Release.Name }}-slurm
+    release: {{ .Release.Name }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ template "cytomine.name" . }}-slurm
+      release: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        role: slurm
+        app: {{ template "cytomine.name" . }}-slurm
+        release: {{ .Release.Name }}
+    spec:
+      serviceAccountName: {{ include "cytomine.serviceAccountName" . }}
+      volumes:
+        - name: singularity-images
+          persistentVolumeClaim:
+            claimName: {{ template "cytomine.name" . }}-singularity-claim
+        - name: ssh-public-key
+          configMap:
+            name: {{ include "cytomine.name" . }}-slurm-config
+      containers:
+        - name: {{ .Chart.Name }}-slurm
+          image: "{{ .Values.slurm.image.repository }}:{{ .Values.slurm.image.tag }}"
+          imagePullPolicy: {{ .Values.slurm.image.pullPolicy }}
+          volumeMounts:
+            - mountPath: "/data/softwares/images"
+              name: singularity-images
+            - name: ssh-public-key
+              mountPath: /home/cytomine/.ssh/authorized_keys
+              subPath: authorized_keys
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+            - name: ssh
+              containerPort: 22
+              protocol: TCP
+          livenessProbe:
+            tcpSocket:
+              port: ssh
+            initialDelaySeconds: 30
+            timeoutSeconds: 5
+          readinessProbe:
+            tcpSocket:
+              port: ssh
+            initialDelaySeconds: 5
+            timeoutSeconds: 1
