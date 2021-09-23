@@ -6,8 +6,17 @@
 # Globals
 #
 
+serverName: "cytomine.test"
 singularityStorage: "2Gi"
 imageStorage: "2Gi"
+
+# Email settings
+adminEmail: info@cytomine.coop
+emailSender: your.email@gmail.com
+emailReceiver: receiver@XXX.com
+smtpPass: passwd
+smtpHost: smtp.gmail.com
+smtpPort: 587
 
 #
 # Services - these are the services deployed by this chart
@@ -59,12 +68,14 @@ slurm:
     tag: v1.0.0
 
 iip_off:
+  port: 8083
   image:
     pullPolicy: IfNotPresent
     repository: cytomine/iipofficial
     tag: v1.2.0
 
 iip_cyto:
+  port: 8084
   image:
     pullPolicy: IfNotPresent
     repository: cytomine/iipcyto
@@ -76,6 +87,27 @@ bioformat:
     pullPolicy: IfNotPresent
     repository: cytomine/bioformat
     tag: v1.1.2
+
+core:
+  port: 8001
+  image:
+    pullPolicy: IfNotPresent
+    repository: cytomine/core
+    tag: v3.0.3
+  # These variables default to a uuid (v4) if not set
+  adminPassword:
+  adminPrivKey:
+  adminPubKey:
+  superAdminPrivKey:
+  superAdminPubKey:
+  imsPrivKey:
+  imsPubKey:
+  rabbitmqPrivKey:
+  rabbitmqPubKey:
+
+ims:
+  port1: 8081
+  port2: 8082
 
 nginx:
   port: 80

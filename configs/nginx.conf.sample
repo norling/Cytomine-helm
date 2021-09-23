@@ -46,7 +46,7 @@ http {
     server {
         client_max_body_size 0;
         listen       80;
-        server_name  {{ include "cytomine.name" . }}.test;
+        server_name  {{ .Values.serverName }};
 
 
         location / {
@@ -54,40 +54,40 @@ http {
             proxy_set_header Host $host;
             proxy_pass http://{{ include "cytomine.name" . }}-web-ui:{{ .Values.web_ui.port }};
         }
-        # location /api {
-        #     proxy_intercept_errors off;
-        #     proxy_set_header X-Real-IP $remote_addr;
-        #     proxy_set_header Host $host;
-        #     proxy_pass http://core:8080;
-        # }
-        # location /j_spring_security { # check and logout
-        #     proxy_set_header X-Real-IP $remote_addr;
-        #     proxy_set_header Host $host;
-        #     proxy_pass http://core:8080;
-        # }
-        # location ~ /(login|logout) {
-        #     proxy_set_header X-Real-IP $remote_addr;
-        #     proxy_set_header Host $host;
-        #     proxy_pass http://core:8080;
-        # }
-        # location ~ /(server|session|custom-ui|static) {
-        #     proxy_set_header X-Real-IP $remote_addr;
-        #     proxy_set_header Host $host;
-        #     proxy_pass http://core:8080;
-        # }
-        # location ~ /(restApiDoc|js/jsondoc|css/jsondoc) {
-        #        proxy_set_header X-Real-IP $remote_addr;
-        #        proxy_set_header Host $host;
-        #        proxy_pass http://core:8080;
-        # }
+        location /api {
+            proxy_intercept_errors off;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header Host $host;
+            proxy_pass http://{{ include "cytomine.name" . }}-core:{{ .Values.core.port }};
+        }
+        location /j_spring_security { # check and logout
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header Host $host;
+            proxy_pass http://{{ include "cytomine.name" . }}-core:{{ .Values.core.port }};
+        }
+        location ~ /(login|logout) {
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header Host $host;
+            proxy_pass http://{{ include "cytomine.name" . }}-core:{{ .Values.core.port }};
+        }
+        location ~ /(server|session|custom-ui|static) {
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header Host $host;
+            proxy_pass http://{{ include "cytomine.name" . }}-core:{{ .Values.core.port }};
+        }
+        location ~ /(restApiDoc|js/jsondoc|css/jsondoc) {
+               proxy_set_header X-Real-IP $remote_addr;
+               proxy_set_header Host $host;
+               proxy_pass http://{{ include "cytomine.name" . }}-core:{{ .Values.core.port }};
+        }
 
-        # proxy_intercept_errors on;
+        proxy_intercept_errors on;
 
-        # error_page 404 = /cytomine-page-not-found;
-        # location /cytomine-page-not-found {
-        #         default_type "text/html";
-        #         alias /opt/nginx/nginx-1.10.1/html/404.html;
-        # }
+        error_page 404 = /cytomine-page-not-found;
+        location /cytomine-page-not-found {
+                default_type "text/html";
+                alias /opt/nginx/nginx-1.10.1/html/404.html;
+        }
 
         # # Upload form should be submitted to this location
         # location /upload {
@@ -133,27 +133,27 @@ http {
     # server {
     #     client_max_body_size 0;
     #     listen       80;
-    #     server_name  iip_off;
+    #     server_name  {{ include "cytomine.name" . }}-iip-official;
 
     #     location / {
     #         proxy_set_header X-Forwarded-Host $host;
     #         proxy_set_header Host $host;
     #         proxy_set_header X-Forwarded-Server $host;
     #         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-    #         proxy_pass http://iip_off:80;
+    #         proxy_pass http://{{ include "cytomine.name" . }}-iip-official:{{ .Values.iip_off.port }};
     #     }
     # }
     # server {
     #     client_max_body_size 0;
     #     listen       80;
-    #     server_name   iip_cyto;
+    #     server_name   {{ include "cytomine.name" . }}-iip-cyto;
 
     #     location / {
     #         proxy_set_header X-Forwarded-Host $host;
     #         proxy_set_header Host $host;
     #         proxy_set_header X-Forwarded-Server $host;
     #         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-    #         proxy_pass http://iip_cyto:80;
+    #         proxy_pass http://{{ include "cytomine.name" . }}-iip-cyto:{{ .Values.iip_cyto.port }};
     #     }
     # }
 }

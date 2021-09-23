@@ -42,3 +42,16 @@ spec:
           env:
           - name: NB_IIP_PROCESS
             value: "10"
+          - name: MEMCACHED_SERVERS
+            value: {{ template "cytomine.name" . }}-memcached:{{ .Values.memcached.port }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.iip_off.port }}
+          # livenessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: http
+          # readinessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: http

@@ -4,4 +4,4 @@ metadata:
   name: {{ include "cytomine.name" . }}-iip-official-config
 data:
   nginx.conf.sample: |-
-    {{ .Files.Get "configs/iip_off.conf.sample" | nindent 4 }}
+    {{ ( tpl (.Files.Get "configs/iip_off.conf.sample") . ) | nindent 4 }}
