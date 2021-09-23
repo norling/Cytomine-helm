@@ -1,0 +1,11 @@
+{{ if .Values.software_router.deploy }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "cytomine.name" . }}-software-router-config
+data:
+  config.groovy: |-
+    {{ .Files.Get "configs/software_router/groovy.conf" | nindent 4 }}
+  id_rsa: |-
+    {{ .Files.Get "configs/software_router/ssh_key" | nindent 4 }}
+{{ end }}

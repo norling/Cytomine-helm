@@ -23,6 +23,7 @@ smtpPort: 587
 #
 
 memcached:
+  deploy: true
   port: 11211
   image:
     pullPolicy: IfNotPresent
@@ -37,6 +38,7 @@ memcached:
       cpu: "500m"
 
 rabbitmq:
+  deploy: true
   port: 5672
   managementPort: 15672
   password: router
@@ -46,12 +48,14 @@ rabbitmq:
     tag: v1.1.2
 
 postgresql:
+  deploy: true
   image:
     pullPolicy: IfNotPresent
     repository: cytomine/postgis
     tag: v2.0.0
 
 mongodb:
+  deploy: true
   port: 27017
   statusPort: 28017
   image:
@@ -60,6 +64,7 @@ mongodb:
     tag: v1.1.2
 
 slurm:
+  deploy: true
   port: 8000
   sshPort: 22
   image:
@@ -68,6 +73,7 @@ slurm:
     tag: v1.0.0
 
 iip_off:
+  deploy: true
   port: 8083
   image:
     pullPolicy: IfNotPresent
@@ -75,6 +81,7 @@ iip_off:
     tag: v1.2.0
 
 iip_cyto:
+  deploy: true
   port: 8084
   image:
     pullPolicy: IfNotPresent
@@ -82,6 +89,7 @@ iip_cyto:
     tag: v1.2.2
 
 bioformat:
+  deploy: true
   port: 4321
   image:
     pullPolicy: IfNotPresent
@@ -89,6 +97,7 @@ bioformat:
     tag: v1.1.2
 
 core:
+  deploy: true
   port: 8001
   image:
     pullPolicy: IfNotPresent
@@ -106,6 +115,7 @@ core:
   rabbitmqPubKey: $RABBITMQ_PUB
 
 ims:
+  deploy: true
   port: 8081
   image:
     pullPolicy: IfNotPresent
@@ -113,6 +123,7 @@ ims:
     tag: v1.2.6
 
 nginx:
+  deploy: true
   port: 80
   image:
     pullPolicy: IfNotPresent
@@ -120,6 +131,7 @@ nginx:
     tag: v1.3.1
 
 web_ui:
+  deploy: true
   port: 8080
   image:
     pullPolicy: IfNotPresent
@@ -127,6 +139,7 @@ web_ui:
     tag: v1.2.1
 
 software_router:
+  deploy: true
   image:
     pullPolicy: IfNotPresent
     repository: cytomine/software_router
