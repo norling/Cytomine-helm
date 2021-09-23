@@ -126,6 +126,12 @@ web_ui:
     repository: cytomine/web_ui
     tag: v1.2.1
 
+software_router:
+  image:
+    pullPolicy: IfNotPresent
+    repository: cytomine/software_router
+    tag: v2.0.0
+
 #
 # Kuberenetes things - these are help make the debugging and administrating of
 #                      the deployment easier.

@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "cytomine.name" . }}-software-router
+  labels:
+    role: software-router
+    app: {{ include "cytomine.name" . }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+    component: {{ .Release.Name }}-software-router
+    release: {{ .Release.Name }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ template "cytomine.name" . }}-software-router
+      release: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        role: software-router
+        app: {{ template "cytomine.name" . }}-software-router
+        release: {{ .Release.Name }}
+    spec:
+      serviceAccountName: {{ include "cytomine.serviceAccountName" . }}
+      volumes:
+        - name: singularity-images
+          persistentVolumeClaim:
+            claimName: {{ template "cytomine.name" . }}-singularity-claim
+        - name: software-router-config
+          configMap:
+            name: {{ include "cytomine.name" . }}-software-router-config
+      containers:
+        - name: {{ .Chart.Name }}-software-router
+          image: "{{ .Values.software_router.image.repository }}:{{ .Values.software_router.image.tag }}"
+          imagePullPolicy: {{ .Values.software_router.image.pullPolicy }}
+          volumeMounts:
+            - mountPath: "/data/softwares/images"
+              name: singularity-images
+            - name: software-router-config
+              mountPath: ./configs/software_router/config.groovy
+              subPath: config.groovy
+            - name: software-router-config
+              mountPath: /home/cytomine/.ssh/id_rsa
+              subPath: id_rsa
