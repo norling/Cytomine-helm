@@ -17,21 +17,21 @@ cytomine.customUI.global = [
 
 
 grails.serverURL="http://{{ include "cytomine.name" . }}-core:{{ .Values.core.port }}"
-grails.imageServerURL=["http://ims:{{ .Values.ims.port1 }}","http://ims:{{ .Values.ims.port2 }}"]
+grails.imageServerURL=["http://ims:{{ .Values.ims.port }}"]
 grails.uploadURL="http://{{ .Values.serverName }}"
 
 storage_buffer="/data/images/_buffer"
 storage_path="/data/images"
 
-grails.adminPassword="{{ .Values.core.adminPassword | default uuidv4 }}"
-grails.adminPrivateKey="{{ .Values.core.adminPrivKey | default uuidv4 }}"
-grails.adminPublicKey="{{ .Values.core.adminPubKey | default uuidv4 }}"
-grails.superAdminPrivateKey="{{ .Values.core.superAdminPrivKey | default uuidv4 }}"
-grails.superAdminPublicKey="{{ .Values.core.superAdminPubKey | default uuidv4 }}"
-grails.ImageServerPrivateKey="{{ .Values.core.imsPrivKey | default uuidv4 }}"
-grails.ImageServerPublicKey="{{ .Values.core.imsPubKey | default uuidv4 }}"
-grails.rabbitMQPrivateKey="{{ .Values.core.rabbitmqPrivKey | default uuidv4 }}"
-grails.rabbitMQPublicKey="{{ .Values.core.rabbitmqPubKey | default uuidv4 }}"
+grails.adminPassword="{{ .Values.core.adminPassword }}"
+grails.adminPrivateKey="{{ .Values.core.adminPrivKey }}"
+grails.adminPublicKey="{{ .Values.core.adminPubKey }}"
+grails.superAdminPrivateKey="{{ .Values.core.superAdminPrivKey }}"
+grails.superAdminPublicKey="{{ .Values.core.superAdminPubKey }}"
+grails.ImageServerPrivateKey="{{ .Values.core.imsPrivKey }}"
+grails.ImageServerPublicKey="{{ .Values.core.imsPubKey }}"
+grails.rabbitMQPrivateKey="{{ .Values.core.rabbitmqPrivKey }}"
+grails.rabbitMQPublicKey="{{ .Values.core.rabbitmqPubKey }}"
 
 grails.notification.email="{{ .Values.emailSender }}"
 grails.notification.password="{{ .Values.smtpPass }}"
