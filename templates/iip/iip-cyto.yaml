@@ -48,6 +48,8 @@ spec:
           ports:
             - name: http
               containerPort: {{ .Values.iip_cyto.port }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
           # livenessProbe:
           #   httpGet:
           #     path: /

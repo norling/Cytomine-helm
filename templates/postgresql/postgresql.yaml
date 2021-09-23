@@ -41,6 +41,8 @@ spec:
               - psql
             initialDelaySeconds: 30
             timeoutSeconds: 5
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
           readinessProbe:
             exec:
               command:

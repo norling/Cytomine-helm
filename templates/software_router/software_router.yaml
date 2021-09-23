@@ -43,4 +43,6 @@ spec:
             - name: software-router-config
               mountPath: /home/cytomine/.ssh/id_rsa
               subPath: id_rsa
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
 {{ end }}

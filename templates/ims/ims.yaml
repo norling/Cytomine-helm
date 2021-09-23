@@ -37,4 +37,6 @@ spec:
           env:
           - name: IMS_STORAGE_PATH
             value: /data/images
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
 {{ end }}
