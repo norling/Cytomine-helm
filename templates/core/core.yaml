@@ -44,7 +44,7 @@ spec:
             - name: http
               containerPort: {{ .Values.core.port }}
           resources:
-            {{- toYaml .Values.resources | nindent 12 }}
+            {{- toYaml .Values.core.resources | nindent 12 }}
           # livenessProbe:
           #   httpGet:
           #     path: /

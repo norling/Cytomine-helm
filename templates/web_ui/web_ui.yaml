@@ -42,7 +42,7 @@ spec:
             - name: http
               containerPort: {{ .Values.web_ui.port }}
           resources:
-            {{- toYaml .Values.resources | nindent 12 }}
+            {{- toYaml .Values.web_ui.resources | nindent 12 }}
           livenessProbe:
             httpGet:
               path: /

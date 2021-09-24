@@ -48,7 +48,7 @@ spec:
               containerPort: 22
               protocol: TCP
           resources:
-            {{- toYaml .Values.resources | nindent 12 }}
+            {{- toYaml .Values.slurm.resources | nindent 12 }}
           livenessProbe:
             tcpSocket:
               port: ssh

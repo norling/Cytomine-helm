@@ -39,5 +39,5 @@ spec:
             - name: http
               containerPort: 80
           resources:
-            {{- toYaml .Values.resources | nindent 12 }}
+            {{- toYaml .Values.nginx.resources | nindent 12 }}
 {{ end }}

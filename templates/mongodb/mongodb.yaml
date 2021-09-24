@@ -35,7 +35,7 @@ spec:
               containerPort: 28017
               protocol: TCP
           resources:
-            {{- toYaml .Values.resources | nindent 12 }}
+            {{- toYaml .Values.mongodb.resources | nindent 12 }}
           livenessProbe:
             tcpSocket:
               port: mongodb

@@ -44,5 +44,5 @@ spec:
               mountPath: /home/cytomine/.ssh/id_rsa
               subPath: id_rsa
           resources:
-            {{- toYaml .Values.resources | nindent 12 }}
+            {{- toYaml .Values.software_router.resources | nindent 12 }}
 {{ end }}

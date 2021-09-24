@@ -38,5 +38,5 @@ spec:
           - name: BIOFORMAT_PORT
             value: "{{ .Values.bioformat.port }}"
           resources:
-            {{- toYaml .Values.resources | nindent 12 }}
+            {{- toYaml .Values.bioformat.resources | nindent 12 }}
 {{ end }}

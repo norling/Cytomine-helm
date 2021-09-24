@@ -39,7 +39,7 @@ spec:
             - name: memcache
               containerPort: {{ .Values.memcached.port }}
           resources:
-            {{- toYaml .Values.resources | nindent 12 }}
+            {{- toYaml .Values.memcached.resources | nindent 12 }}
           livenessProbe:
             tcpSocket:
               port: memcache
