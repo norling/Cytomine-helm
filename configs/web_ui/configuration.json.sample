@@ -1,5 +1,5 @@
 {
-  "CYTOMINE_CORE_HOST": "http://{{ include "cytomine.name" . }}-core:{{ .Values.core.port }}",
+  "CYTOMINE_CORE_HOST": "http://{{ .Values.serverName }}",
   "CYTOMINE_UPLOAD_HOST": "http://{{ .Values.serverName }}",
   "DIGITAL_ZOOM_INCREMENT": 4,
   "VIEWER_ANNOTATIONS_REFRESH_INTERVAL": 10000,

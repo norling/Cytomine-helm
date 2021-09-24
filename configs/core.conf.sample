@@ -16,7 +16,7 @@ cytomine.customUI.global = [
 ]
 
 
-grails.serverURL="http://{{ include "cytomine.name" . }}-core:{{ .Values.core.port }}"
+grails.serverURL="http://{{ .Values.serverName }}"
 grails.imageServerURL=["http://ims:{{ .Values.ims.port }}"]
 grails.uploadURL="http://{{ .Values.serverName }}"
 
