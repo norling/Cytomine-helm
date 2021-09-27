@@ -5,7 +5,7 @@ metadata:
   name: {{ include "cytomine.name" . }}-web-ui-config
 data:
   nginx.conf: |-
-    {{ (tpl (.Files.Get "configs/web_ui/nginx.conf.sample") . ) | nindent 4 }}
+    {{ (tpl (.Files.Get "configs/web_ui/nginx.conf") . ) | nindent 4 }}
   configuration.json: |-
-    {{ (tpl (.Files.Get "configs/web_ui/configuration.json.sample") . ) | nindent 4 }}
+    {{ (tpl (.Files.Get "configs/web_ui/configuration.json") . ) | nindent 4 }}
 {{ end }}

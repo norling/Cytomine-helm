@@ -5,5 +5,5 @@ metadata:
   name: {{ include "cytomine.name" . }}-memcached-config
 data:
   memcached.conf: |-
-    {{ .Files.Get "configs/memcached.conf.sample" | nindent 4 }}
+    {{ .Files.Get "configs/memcached.conf" | nindent 4 }}
 {{ end }}

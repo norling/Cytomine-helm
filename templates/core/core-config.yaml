@@ -5,5 +5,5 @@ metadata:
   name: {{ include "cytomine.name" . }}-core-config
 data:
    cytomineconfig.groovy: |-
-    {{ (tpl (.Files.Get "configs/core.conf.sample") . ) | nindent 4 }}
+    {{ (tpl (.Files.Get "configs/core.conf") . ) | nindent 4 }}
 {{ end }}
