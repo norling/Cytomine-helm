@@ -127,7 +127,7 @@ http {
         # Pass altered request body to a backend
         location @ims {
             add_header 'Access-Control-Allow-Origin' '*';
-            proxy_pass   http://ims:8080;
+            proxy_pass   http://{{ template "cytomine.name" . }}-ims:{{ .Values.ims.port }};
             proxy_read_timeout 600;
         }
         {{ end }}
