@@ -40,6 +40,9 @@ spec:
             - name: ims-config
               mountPath: /usr/share/tomcat7/.grails/imageserverconfig.properties
               subPath: imageserverconfig.properties
+          ports:
+            - name: http
+              containerPort: 8080
           env:
           - name: IMS_STORAGE_PATH
             value: /data/images

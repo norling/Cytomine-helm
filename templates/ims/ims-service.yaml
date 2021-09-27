@@ -9,6 +9,6 @@ spec:
   ports:
     - name: http
       port: {{ .Values.ims.port }}
-      targetPort: {{ .Values.ims.port }}
+      targetPort: 8080
       protocol: TCP
 {{ end }}
