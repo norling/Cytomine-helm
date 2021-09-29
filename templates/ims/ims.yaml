@@ -27,6 +27,9 @@ spec:
         - name: images
           persistentVolumeClaim:
             claimName: {{ template "cytomine.name" . }}-image-claim
+        - name: image-temp
+          persistentVolumeClaim:
+            claimName: {{ template "cytomine.name" . }}-temp-image-claim
         - name: ims-config
           configMap:
             name: {{ template "cytomine.name" . }}-ims-config
@@ -37,6 +40,8 @@ spec:
           volumeMounts:
             - name: images
               mountPath: "/data/images"
+            - name: image-temp
+              mountPath: "/tmp/uploaded"
             - name: ims-config
               mountPath: /usr/share/tomcat7/.grails/imageserverconfig.properties
               subPath: imageserverconfig.properties
