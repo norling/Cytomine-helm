@@ -38,7 +38,7 @@ spec:
             - mountPath: "/data/softwares/images"
               name: singularity-images
             - name: software-router-config
-              mountPath: ./configs/software_router/config.groovy
+              mountPath: /software_router/config.groovy
               subPath: config.groovy
             - name: software-router-config
               mountPath: /home/cytomine/.ssh/id_rsa

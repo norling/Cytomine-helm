@@ -36,6 +36,7 @@ rabbitmq:
   deploy: true
   port: 5672
   managementPort: 15672
+  username: router
   password: router
   image:
     pullPolicy: IfNotPresent
@@ -62,7 +63,7 @@ mongodb:
   resources: {}
 
 slurm:
-  deploy: false
+  deploy: true
   port: 8000
   sshPort: 22
   image:
@@ -146,7 +147,7 @@ web_ui:
   resources: {}
 
 software_router:
-  deploy: false
+  deploy: true
   image:
     pullPolicy: IfNotPresent
     repository: cytomine/software_router
