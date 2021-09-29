@@ -9,8 +9,7 @@ production systems in its current state.
 
 ### Critical
 
-- An unknown authentication issue between `ims` and `core` prevents file
-  uploads.
+- A routing issue prevents accessing uploaded images in `ims`.
 
 - `software_router` needs a redesign so that it can use kubernetes jobs (or
   something like that) for running algorithms.
