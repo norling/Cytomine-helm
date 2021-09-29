@@ -61,7 +61,7 @@ mongodb:
   resources: {}
 
 slurm:
-  deploy: true
+  deploy: false
   port: 8000
   sshPort: 22
   image:
@@ -145,7 +145,7 @@ web_ui:
   resources: {}
 
 software_router:
-  deploy: true
+  deploy: false
   image:
     pullPolicy: IfNotPresent
     repository: cytomine/software_router
