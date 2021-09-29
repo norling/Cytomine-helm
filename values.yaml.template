@@ -10,6 +10,7 @@ serverName: "cytomine.test"
 singularityStorage: "2Gi"
 tempImageStorage: "1Gi"
 imageStorage: "2Gi"
+mongodbStorage: "1Gi"
 
 # Email settings
 adminEmail: info@cytomine.coop

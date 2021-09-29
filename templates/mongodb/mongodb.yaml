@@ -23,10 +23,17 @@ spec:
         release: {{ .Release.Name }}
     spec:
       serviceAccountName: {{ include "cytomine.serviceAccountName" . }}
+      volumes:
+      - name: mongodb-storage
+        persistentVolumeClaim:
+          claimName: {{ template "cytomine.name" . }}-mongodb-claim
       containers:
         - name: {{ .Chart.Name }}-mongodb
           image: "{{ .Values.mongodb.image.repository }}:{{ .Values.mongodb.image.tag }}"
           imagePullPolicy: {{ .Values.mongodb.image.pullPolicy }}
+          volumeMounts:
+            - name: mongodb-storage
+              mountPath: "/data/db"
           ports:
             - name: mongodb
               containerPort: 27017
