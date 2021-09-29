@@ -38,8 +38,10 @@ spec:
             - name: images
               mountPath: "/data/images"
             - name: nginx-config
-              mountPath: /tmp/nginx.conf.sample
+              mountPath: /config-temp/nginx.conf.sample
               subPath: nginx.conf.sample
+          command: ["/bin/sh"]
+          args: ["-c", "cp /config-temp/nginx.conf.sample /tmp/nginx.conf.sample && /tmp/deploy.sh"]
           env:
           - name: NB_IIP_PROCESS
             value: "10"

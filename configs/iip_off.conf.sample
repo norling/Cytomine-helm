@@ -24,7 +24,7 @@ IIP_PROCESS
 
 	server {
         	listen {{ .Values.iip_off.port }};
-		    server_name iip_official;
+		    server_name {{ include "cytomine.name" . }}-iip-official;
         	location /fcgi-bin/iipsrv.fcgi {
                 	add_header Access-Control-Allow-Origin *;
                		fastcgi_pass    iip-up;
