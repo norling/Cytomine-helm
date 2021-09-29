@@ -17,8 +17,9 @@ export IMS_SEC=$( uuidgen )
 export IMS_PUB=$( uuidgen )
 export RABBITMQ_SEC=$( uuidgen )
 export RABBITMQ_PUB=$( uuidgen )
+export SERVER_ID=$( uuidgen )
 
-env_vars='$ADMIN_PASS $ADMIN_SEC $ADMIN_PUB $SUPERADMIN_SEC $SUPERADMIN_PUB $IMS_SEC $IMS_PUB $RABBITMQ_SEC $RABBITMQ_PUB'
+env_vars='$ADMIN_PASS $ADMIN_SEC $ADMIN_PUB $SUPERADMIN_SEC $SUPERADMIN_PUB $IMS_SEC $IMS_PUB $RABBITMQ_SEC $RABBITMQ_PUB $SERVER_ID'
 
 echo "writing values.yaml file"
 envsubst <values.yaml.template "$env_vars" >values.yaml
