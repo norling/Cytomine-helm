@@ -23,10 +23,24 @@ spec:
         release: {{ .Release.Name }}
     spec:
       serviceAccountName: {{ include "cytomine.serviceAccountName" . }}
+      volumes:
+      - name: postgres-storage
+        persistentVolumeClaim:
+          claimName: {{ template "cytomine.name" . }}-postgres-claim
       containers:
         - name: {{ .Chart.Name }}-postgis
           image: "{{ .Values.postgresql.image.repository }}:{{ .Values.postgresql.image.tag }}"
           imagePullPolicy: {{ .Values.postgresql.image.pullPolicy }}
+          volumeMounts:
+            - name: postgres-storage
+              mountPath: "/postgres-data/"
+          env:
+          - name: DATA_DIR
+            value: "/var/lib/postgresql/10/main"
+          command: ["/bin/bash"]
+          # if the persistent volume seems empty, copy the data from the default
+          # to the persistent volume, then start postgres using it.
+          args: ["-c", "[ ! -f /postgres-data/PG_VERSION ] && echo 'copying' && cp -r $DATA_DIR/* /postgres-data; su postgres -c '/usr/lib/postgresql/10/bin/postgres -D /postgres-data -c config_file=/etc/postgresql/10/main/postgresql.conf'"]
           ports:
             - name: postgres
               containerPort: 5432

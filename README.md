@@ -14,8 +14,6 @@ production systems in its current state.
 
 ### high priority
 
-- The postgis database is currently not on a persistent volume
-
 - Most resources don't have proper liveness/readiness probes making it hard to
   tell when they become unhealthy.
 
