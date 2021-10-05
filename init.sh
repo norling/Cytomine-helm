@@ -4,10 +4,14 @@
 #
 
 echo "Generating encryption keys"
-openssl genrsa -out "configs/software_router/ssh_key" 2>/dev/null
-openssl rsa -in "configs/software_router/ssh_key" -pubout -out "configs/software_router/ssh_key.pub" 2>/dev/null
+key_file="configs/software_router/ssh_key"
+if [ -f "$key_file" ]
+then
+    rm $key_file $key_file.pub
+fi
+ssh-keygen -C local -t rsa -f $key_file -P '' >/dev/null
 
-echo "generating message authentication keys"
+echo "Generating message authentication keys"
 export ADMIN_PASS=$( uuidgen )
 export ADMIN_SEC=$( uuidgen )
 export ADMIN_PUB=$( uuidgen )
@@ -21,5 +25,5 @@ export SERVER_ID=$( uuidgen )
 
 env_vars='$ADMIN_PASS $ADMIN_SEC $ADMIN_PUB $SUPERADMIN_SEC $SUPERADMIN_PUB $IMS_SEC $IMS_PUB $RABBITMQ_SEC $RABBITMQ_PUB $SERVER_ID'
 
-echo "writing values.yaml file"
+echo "Writing values.yaml file"
 envsubst <values.yaml.template "$env_vars" >values.yaml
