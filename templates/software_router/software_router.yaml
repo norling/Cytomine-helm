@@ -34,6 +34,13 @@ spec:
         - name: {{ .Chart.Name }}-software-router
           image: "{{ .Values.software_router.image.repository }}:{{ .Values.software_router.image.tag }}"
           imagePullPolicy: {{ .Values.software_router.image.pullPolicy }}
+          livenessProbe:
+            exec:
+              command:
+              - curl
+              - http://{{ .Values.serverName }}/api/user/current.json
+            initialDelaySeconds: 10
+            periodSeconds: 20
           volumeMounts:
             - mountPath: "/data/softwares/images"
               name: singularity-images
