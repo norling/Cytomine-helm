@@ -34,13 +34,8 @@ spec:
         - name: {{ .Chart.Name }}-software-router
           image: "{{ .Values.software_router.image.repository }}:{{ .Values.software_router.image.tag }}"
           imagePullPolicy: {{ .Values.software_router.image.pullPolicy }}
-          livenessProbe:
-            exec:
-              command:
-              - curl
-              - http://{{ .Values.serverName }}/api/user/current.json
-            initialDelaySeconds: 10
-            periodSeconds: 20
+          command: ["/bin/bash"]
+          args: ["-c", "cd /software_router; java -jar Cytomine-software-router.jar | tee /tmp/log.out"]
           volumeMounts:
             - mountPath: "/data/softwares/images"
               name: singularity-images
