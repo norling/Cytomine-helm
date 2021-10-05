@@ -30,6 +30,9 @@ spec:
         - name: software-router-config
           configMap:
             name: {{ include "cytomine.name" . }}-software-router-config
+        - name: dockersock
+          hostPath:
+            path: /var/run/docker.sock
       initContainers:
         - name: core-check
           image: alpine:3.14
@@ -50,6 +53,8 @@ spec:
             - name: software-router-config
               mountPath: /home/cytomine/.ssh/id_rsa
               subPath: id_rsa
+            - name: dockersock
+              mountPath: /var/run/docker.sock
           resources:
             {{- toYaml .Values.software_router.resources | nindent 12 }}
 {{ end }}
