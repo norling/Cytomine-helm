@@ -30,6 +30,11 @@ spec:
         - name: software-router-config
           configMap:
             name: {{ include "cytomine.name" . }}-software-router-config
+      initContainers:
+        - name: core-check
+          image: alpine:3.14
+          command: ["wget"]
+          args: ["http://{{ .Values.serverName }}/api/user/current.json"]
       containers:
         - name: {{ .Chart.Name }}-software-router
           image: "{{ .Values.software_router.image.repository }}:{{ .Values.software_router.image.tag }}"
