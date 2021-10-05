@@ -22,6 +22,7 @@ spec:
         app: {{ template "cytomine.name" . }}-slurm
         release: {{ .Release.Name }}
     spec:
+      hostname: slurm
       serviceAccountName: {{ include "cytomine.serviceAccountName" . }}
       volumes:
         - name: singularity-images
