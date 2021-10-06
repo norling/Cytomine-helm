@@ -12,18 +12,26 @@ production systems in its current state.
 - `software_router` needs a redesign so that it can use kubernetes jobs (or
   something like that) for running algorithms.
 
-### high priority
+  - Job results are currently fetched by `ssh`. This should probably be replaced
+    with a rabbitmq message or similar.
+
+### High priority
 
 - Most resources don't have proper liveness/readiness probes making it hard to
   tell when they become unhealthy.
 
-### medium priority
+### Medium priority
 
 - Everything uses deployments, where some containers should use different
-  resource types to scale properly.
+  resource types to scale properly. e.g. the databases should probably be
+  StatefulSets.
 
 - Sensitive data that is now set using configmaps should should be set using
   proper secrets.
+
+### Low priority
+
+- The nginx container could be replaced with ingress rules.
 
 ## Short kubernetes intro
 
