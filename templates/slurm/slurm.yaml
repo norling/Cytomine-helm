@@ -28,7 +28,7 @@ spec:
         - name: singularity-images
           persistentVolumeClaim:
             claimName: {{ template "cytomine.name" . }}-singularity-claim
-        - name: ssh-public-key
+        - name: slurm-config
           configMap:
             name: {{ include "cytomine.name" . }}-slurm-config
       containers:
@@ -38,9 +38,12 @@ spec:
           volumeMounts:
             - mountPath: "/data/softwares/images"
               name: singularity-images
-            - name: ssh-public-key
+            - name: slurm-config
               mountPath: /home/cytomine/.ssh/authorized_keys
               subPath: authorized_keys
+            - name: slurm-config
+              mountPath: /etc/slurm/slurm.conf
+              subPath: slurm.conf
           ports:
             - name: http
               containerPort: 80
