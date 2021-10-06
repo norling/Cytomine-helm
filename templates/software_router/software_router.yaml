@@ -29,6 +29,7 @@ spec:
             claimName: {{ template "cytomine.name" . }}-singularity-claim
         - name: software-router-secret
           secret:
+            defaultMode: 0400
             secretName: {{ include "cytomine.name" . }}-software-router-secret
         - name: dockersock
           hostPath:

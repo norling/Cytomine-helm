@@ -9,7 +9,7 @@ if [ -f "$key_file" ]
 then
     rm $key_file $key_file.pub
 fi
-ssh-keygen -C local -t rsa -f $key_file -P '' >/dev/null
+ssh-keygen -C local -t rsa -m pem -b 2048 -f $key_file -P '' -q
 
 echo "Generating message authentication keys"
 export ADMIN_PASS=$( uuidgen )
