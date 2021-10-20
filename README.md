@@ -7,27 +7,22 @@ production systems in its current state.
 
 ## Current Limitations
 
-### Critical
-
-- `software_router` needs a redesign so that it can use kubernetes jobs (or
-  something like that) for running algorithms.
-
-  - Job results are currently fetched by `ssh`. This should probably be replaced
-    with a rabbitmq message or similar.
 
 ### High priority
 
 - Most resources don't have proper liveness/readiness probes making it hard to
   tell when they become unhealthy.
 
+- There are very few security considerations in the system.
+  - communication between services should be encrypted
+  - sensitive data should be stored in secrets
+  - usernames and passwords should be generated in a secure way
+
 ### Medium priority
 
 - Everything uses deployments, where some containers should use different
   resource types to scale properly. e.g. the databases should probably be
   StatefulSets.
-
-- Sensitive data that is now set using configmaps should should be set using
-  proper secrets.
 
 ### Low priority
 

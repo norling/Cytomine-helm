@@ -148,8 +148,17 @@ web_ui:
     tag: v1.2.1
   resources: {}
 
-software_router:
+k8s_software_router:
   deploy: true
+  image:
+    pullPolicy: Never
+    repository: cytomine/k8s_software_router
+    tag: latest
+  github_username: ""
+  github_password: ""
+
+software_router:
+  deploy: false
   image:
     pullPolicy: IfNotPresent
     repository: cytomine/software_router
