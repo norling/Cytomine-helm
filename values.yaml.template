@@ -143,8 +143,8 @@ web_ui:
 k8s_software_router:
   deploy: true
   image:
-    pullPolicy: Never
-    repository: cytomine/k8s_software_router
+    pullPolicy: IfNotPresent
+    repository: norling/k8s-software-router
     tag: latest
   github_username: ""
   github_password: ""
