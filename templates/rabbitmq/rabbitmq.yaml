@@ -23,19 +23,36 @@ spec:
         release: {{ .Release.Name }}
     spec:
       serviceAccountName: {{ include "cytomine.serviceAccountName" . }}
+      volumes:
+        - name: rabbitmq-secret
+          secret:
+            defaultMode: 0755
+            secretName: {{ include "cytomine.name" . }}-rabbitmq-secret
+        - name: rabbitmq-log
+          emptyDir: {}
       containers:
         - name: {{ .Chart.Name }}-rabbitmq
           image: "{{ .Values.rabbitmq.image.repository }}:{{ .Values.rabbitmq.image.tag }}"
           imagePullPolicy: {{ .Values.rabbitmq.image.pullPolicy }}
           env:
-          - name: RABBITMQ_PASS
-            value: {{ .Values.rabbitmq.password }}
+          - name: RABBITMQ_PID_FILE
+            value: "/var/lib/rabbitmq/mnesia/rabbit@c12b9c650697.pid"
+          volumeMounts:
+            - name: rabbitmq-secret
+              mountPath: /init.sh
+              subPath: init.sh
+            - name: rabbitmq-log
+              mountPath: "/var/log/rabbitmq"
+          command: ["/bin/bash"]
+          args: ["-c", "/init.sh"]
           ports:
             - name: amqp
               containerPort: {{ .Values.rabbitmq.port }}
               protocol: TCP
             - name: management
               containerPort: {{ .Values.rabbitmq.managementPort }}
+          securityContext:
+            runAsUser: 106
           resources:
             {{- toYaml .Values.rabbitmq.resources | nindent 12 }}
           livenessProbe:
