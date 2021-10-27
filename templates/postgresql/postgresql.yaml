@@ -40,11 +40,13 @@ spec:
           command: ["/bin/bash"]
           # if the persistent volume seems empty, copy the data from the default
           # to the persistent volume, then start postgres using it.
-          args: ["-c", "[ ! -f /postgres-data/PG_VERSION ] && echo 'copying' && cp -r $DATA_DIR/* /postgres-data; su postgres -c '/usr/lib/postgresql/10/bin/postgres -D /postgres-data -c config_file=/etc/postgresql/10/main/postgresql.conf'"]
+          args: ["-c", "[ ! -f /postgres-data/PG_VERSION ] && cp -r $DATA_DIR/* /postgres-data; /usr/lib/postgresql/10/bin/postgres -D /postgres-data -c config_file=/etc/postgresql/10/main/postgresql.conf"]
           ports:
             - name: postgres
               containerPort: 5432
               protocol: TCP
+          securityContext:
+            runAsUser: 105
           livenessProbe:
             exec:
               command:
