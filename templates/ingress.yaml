@@ -2,8 +2,11 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: {{ include "cytomine.name" . }}-ingress
+  {{- with .Values.ingress.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
 spec:
-  ingressClassName: nginx
   rules:
     - host: {{ .Values.serverName }}
       http:
@@ -15,3 +18,7 @@ spec:
                 name: {{ include "cytomine.name" . }}-nginx
                 port:
                   number: 80
+  tls:
+  - hosts:
+    - {{ .Values.serverName }}
+    secretName: {{ include "cytomine.name" . }}-ingress-tls
