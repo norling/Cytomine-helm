@@ -70,8 +70,8 @@ mongodb:
   statusPort: 28017
   image:
     pullPolicy: IfNotPresent
-    repository: cytomine/mongodb
-    tag: v1.1.2
+    repository: mongo
+    tag: 2.6.12 # very old, but needs core to be updated
   resources: {}
 
 iip_off:

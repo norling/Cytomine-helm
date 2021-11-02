@@ -31,7 +31,6 @@ spec:
         - name: {{ .Chart.Name }}-mongodb
           image: "{{ .Values.mongodb.image.repository }}:{{ .Values.mongodb.image.tag }}"
           imagePullPolicy: {{ .Values.mongodb.image.pullPolicy }}
-          command: ["mongod"]
           volumeMounts:
             - name: mongodb-storage
               mountPath: "/data/db"
@@ -44,14 +43,4 @@ spec:
               protocol: TCP
           resources:
             {{- toYaml .Values.mongodb.resources | nindent 12 }}
-          livenessProbe:
-            tcpSocket:
-              port: mongodb
-            initialDelaySeconds: 30
-            timeoutSeconds: 5
-          readinessProbe:
-            tcpSocket:
-              port: mongodb
-            initialDelaySeconds: 5
-            timeoutSeconds: 1
 {{ end }}
